@@ -99,6 +99,15 @@ class PartnerCenter {
     }
   }
 
+  async getCustomerLicesnseUsageById (customerId: string): Promise<object> {
+    try{
+      let res = await this._partnerCenterRequest(`https://api.partnercenter.microsoft.com/v1/customers/${customerId}/analytics/licenses/usage`, { headers: this.reqHeaders })
+      return JSON.parse(res.body.slice(1))
+    } catch (err) {
+      throw err
+    }
+  }
+
   async updateCustomerSubscriptionUsers (
     customerId: string,
     subscriptionId: string,
